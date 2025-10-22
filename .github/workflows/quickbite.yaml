@@ -26,10 +26,10 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST << 'EOF'
             set -e
-            cd /home/data/quickbite-project/
-            ls
+            cd /home/ubuntu/data/quickbite-project/
+            ls -al
             pwd
-            #whoami
+            whoami
             git pull origin main
             #npm install
             #npm run build

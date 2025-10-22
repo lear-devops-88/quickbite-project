@@ -28,21 +28,21 @@ jobs:
             set -e
             cd /home/ubuntu/data/quickbite-project/
             ls -al
+            git pull origin main
             cd /home/ubuntu/data/quickbite-project/logic
             ls -al
             chmod +x *
-            nohup ./mvnw spring-boot:run > logic.log 2>&1 
+            pm2 start "./mvnw spring-boot:run" --name logic
             cd /home/ubuntu/data/quickbite-project/gateway
             ls -al
             chmod +x *
-            nohup ./mvnw spring-boot:run > gateway.log 2>&1 &
+            pm2 start "./mvnw spring-boot:run" --name gateway
             cd /home/ubuntu/data/quickbite-project/frontend
             ls -al
             chmod +x *
             #pwd
             #whoami
-            #git pull origin main
             npm install
-            npm run dev -- --host
+            pm2 start "npm run dev -- --host" --name frontend
             #pm2 restart all || npm run start
           EOF

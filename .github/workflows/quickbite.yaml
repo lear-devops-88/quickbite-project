@@ -1,1 +1,37 @@
 #quickbite github ci
+name: Deploy to EC2
+on:
+  push:
+    branches:
+      - main  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      EC2_USER: ubuntu
+      EC2_HOST: 54.169.37.37 
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts
+
+      - name: Deploy via SSH
+        run: |
+          ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST << 'EOF'
+            set -e
+            cd /home/data/quickbite-project/
+            ls
+            pwd
+            whoami
+            #git pull origin main
+            #npm install
+            #npm run build
+            #pm2 restart all || npm run start
+          EOF

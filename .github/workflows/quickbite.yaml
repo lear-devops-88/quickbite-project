@@ -30,12 +30,15 @@ jobs:
             ls -al
             cd /home/ubuntu/data/quickbite-project/logic
             ls -al
+            chmod +x *
             nohup ./mvnw spring-boot:run > logic.log 2>&1 
             cd /home/ubuntu/data/quickbite-project/gateway
             ls -al
+            chmod +x *
             nohup ./mvnw spring-boot:run > gateway.log 2>&1 &
             cd /home/ubuntu/data/quickbite-project/frontend
             ls -al
+            chmod +x *
             #pwd
             #whoami
             #git pull origin main

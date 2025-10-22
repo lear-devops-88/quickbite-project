@@ -44,5 +44,6 @@ jobs:
             #whoami
             npm install
             pm2 start "npm run dev -- --host" --name frontend
+            pm2 list
             #pm2 restart all || npm run start
           EOF

@@ -29,8 +29,8 @@ jobs:
             cd /home/data/quickbite-project/
             ls
             pwd
-            whoami
-            #git pull origin main
+            #whoami
+            git pull origin main
             #npm install
             #npm run build
             #pm2 restart all || npm run start
